@@ -57,7 +57,7 @@ const ProductDetail = () => {
 
 
 
-  if (!values) {
+  if (!props) {
 
     return <div>Product not found</div>;
 
@@ -66,11 +66,11 @@ const ProductDetail = () => {
   return (
 
     <div className='productDetail'>
-      <img src={values.imgsrc} alt='values-img' className='productImage'></img>
+      <img src={props.imgsrc} alt='values-img' className='productImage'></img>
 
-      <h2>{values.h}</h2>
+      <h2>{props.h}</h2>
 
-      <p>Price: ${values.rate}</p>
+      <p>Price: ${props.rate}</p>
 
       
     </div>
