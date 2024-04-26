@@ -10,7 +10,7 @@ import { BsTwitterX } from "react-icons/bs";
 function Foot() {
   return (
     <div>
-        {/* <img className='w-100' src={img1}/> */}
+        { <img className='w-100' src= "./asserts/imgg.png"/> }
       <footer className='bg-body-tertiary m-auto text-center foot w-100  p-3'>
         <a className='aa' target="_blank" href='https://www.facebook.com/flipkart/'><span><FaFacebookF />FaceBook</span></a>
         <a className='aa' target="_blank" href='https://www.instagram.com/flipkart/?hl=en'><span><FaInstagram />Instagram</span></a>

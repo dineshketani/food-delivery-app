@@ -1,15 +1,23 @@
-import React from 'react';
+import React,{ useState} from 'react';
 import './Navbar.css';
 import { useNavigate } from "react-router-dom";
 import { Link } from 'react-router-dom';
 import { FaSearch } from "react-icons/fa";
-// import imglogo_black from './png-transparent-food-icon-delivery-icon-sushi-pizza-delivery-scooter-courier-food-delivery-text-thumbnail-removebg-preview.png';
 import { IoRestaurant } from "react-icons/io5";
+import values from '../Home/Data';
+import { FaCrown } from "react-icons/fa6";
+
 function Navbar() {
+
+  const[search, setSearch] = useState("");
 
 const userData = JSON.parse(localStorage.getItem("user"));
 
   const navigate = useNavigate();
+  const divStyle = {
+    color: '#FFD700',
+    size: '25px',
+  };
 
     const home = () => {
         navigate('/');
@@ -24,6 +32,9 @@ const userData = JSON.parse(localStorage.getItem("user"));
   };
   const myprofile = () => {
     navigate('/myprofile');
+};
+const myaddress = () => {
+  navigate('/myaddress');
 };
 
   return (
@@ -44,10 +55,13 @@ const userData = JSON.parse(localStorage.getItem("user"));
               <IoRestaurant className='logoo' />
               </a>
               <ul className="dropdown-menu">
-                <li><a className="dropdown-item" onClick={myprofile}  href="#">{userData.name}</a></li>
+              <li><a className="dropdown-item" onClick={myprofile} href="#">{userData ? userData.name : 'MyProfile'}</a></li>
+                <li><a className="dropdown-item" onClick={myaddress} href="#">Address</a></li>
                 {/* <li><a className="dropdown-item" href="#">Home</a></li> */}
                 <li><a className="dropdown-item" onClick={handleLoginClick}  href="#">New User</a></li>
                 <li><a className="dropdown-item" onClick={handleClick} href="#">Log Out</a></li>
+                <li><a className="dropdown-item" href="#">Hungry Hub Gold<FaCrown  style={divStyle}/></a></li>
+
                 
               </ul>
             </li>
@@ -56,8 +70,23 @@ const userData = JSON.parse(localStorage.getItem("user"));
 
           </ul>
           <form className="d-flex" role="search">
-            <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-            <button className="btn btn-outline-success" type="submit">Search</button>
+            <input className="form-control me-2" type="search" value={search} placeholder="Search" aria-label="Search"
+              onChange={(e) => setSearch(e.target.value) }/>
+             <div className="template_Container">
+          { 
+            
+              values.filter(values => values.h.toLowerCase().includes(search.toLowerCase())).map((values) => {
+                return(
+                  <div className="template" key={values.h}>
+                      {/* <img src={values.imgsrc} alt="" />
+                      <h3>{values.h}</h3>
+                      <p className="price">${values.rate}</p> */}
+                  </div> 
+                )
+              })
+          } 
+         </div>
+            <button className="btn btn-outline-success" type="search">Search</button>
           </form>
         </div>
       </div>
